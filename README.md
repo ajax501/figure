@@ -1,6 +1,6 @@
-﻿# FIGURE
+# FIGURE
 
-Premium clothing storefront with product 001, five product views, XS–XXL sizing, persistent bag, and Stripe-hosted Checkout on Vercel.
+Premium clothing storefront with product 001, actual front and back product views, XS–XXL sizing, persistent bag, and Stripe-hosted Checkout on Vercel.
 
 ## Deploy
 
