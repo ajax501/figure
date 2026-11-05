@@ -1,9 +1,3 @@
-/* Public catalog configuration. Never put secret keys in this file.
-   Add only verified Stripe Payment Links for the matching product and size.
-   Until confirmed prices and links are set, checkout stays unavailable. */
-window.FIGURE_COMMERCE = {
-  currency: 'USD',
-  products: {
-    '001': { price: 22000, paymentLinks: {} }
-  }
-};
+/* Generated from lib/catalog.json by sync-catalog.js. */
+window.FIGURE_CATALOG = [{"id":"001","name":"001","model":"FIGURE 001 — Jacket & Trouser Set","price":22000,"image":"assets/001/actual-front.png","subtitle":"Yellow / black","description":"A yellow-and-black camouflage set. Zip-front jacket and matching trousers included. Explore the actual product from the front and back.","photos":[["actual-front","Front look"],["actual-back","Back look"]],"concept":false,"details":"Jacket and trousers sold together as one set. Yellow-and-black camouflage with a stand collar, full zip front, and elasticated cuffs and trouser hems. Fabric composition, measurements, and care instructions are to be confirmed.","includes":"Jacket and trouser included."},{"id":"002","name":"002","model":"FIGURE 002","price":null,"image":"assets/002/front.png","subtitle":"Black / blue / white","description":"A black silhouette scattered with blue and white star motifs. A stand-collar zip jacket and matching trousers, shown from the front, back, seated, and jacket-only views.","photos":[["front","Front look"],["back","Back look"],["seated","Seated look"],["jacket","Jacket view"]],"concept":false,"details":"Star-patterned black jacket and trousers, with a full zip front, stand collar, and elasticated cuffs. Fabric composition, measurements, and care instructions are to be confirmed.","includes":""},{"id":"003","name":"The Discipline Trouser","model":"FIGURE 003","price":null,"subtitle":"Carbon","type":"pants","concept":true,"description":"A fluid, straight silhouette with a composed stance. Design concept; final materials and release details are to be confirmed."}];
+window.FIGURE_COMMERCE = {"currency":"USD","products":{"001":{"price":22000},"002":{"price":null},"003":{"price":null}}};

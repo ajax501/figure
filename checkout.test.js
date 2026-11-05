@@ -84,3 +84,25 @@ test('verified payment removes only purchased quantities, once; unpaid order pre
  paid=true;await vm.runInContext('verifyOrder()',context);await vm.runInContext('verifyOrder()',context);
  assert.equal(context.bag[0].qty,1);assert.equal(context.bag[1].qty,1);assert.equal(storage.size,0);
 });
+
+test('unpriced products and concepts cannot be charged',()=>{
+ assert.throws(()=>validateCart([{id:'002',size:'M',qty:1}]));
+ assert.throws(()=>validateCart([{id:'003',size:'M',qty:1}]));
+});
+test('mixed-product checkout uses catalog prices and one shipping charge',async()=>{
+ const products=require('./lib/catalog.json'),second=products.find(p=>p.id==='002');const old=second.price;second.price=12345;
+ try{
+  let params;const client={checkout:{sessions:{create:async p=>{params=p;return {id:'cs_test_123456789012',url:'https://checkout.stripe.com/c/pay/test'};}}}};
+  const body={items:[{id:'001',size:'XXL',qty:2},{id:'002',size:'XS',qty:1,price:1}],requestId:'mixed-products-123456789012'};
+  const response=await createCheckout(request(body),client,config);assert.equal(response.status,200);
+  assert.equal(params.line_items.length,2);assert.equal(params.line_items[1].price_data.unit_amount,12345);
+  assert.equal(params.line_items[1].price_data.product_data.metadata.product_id,'002');assert.equal(params.line_items[1].price_data.product_data.metadata.size,'XS');
+  assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
+ }finally{second.price=old;}
+});
+test('every photographic view exists and catalog sync preserves product 002',()=>{
+ const products=require('./lib/catalog.json');for(const p of products)for(const [view] of p.photos||[])assert.ok(fs.existsSync(`public/assets/${p.id}/${view}.png`));
+ const context={window:{}};vm.runInNewContext(fs.readFileSync('public/commerce-config.js','utf8'),context);
+ const product=context.window.FIGURE_CATALOG.find(p=>p.id==='002');assert.equal(product.photos.length,4);assert.equal(product.concept,false);assert.equal(context.window.FIGURE_COMMERCE.products['002'].price,null);
+ assert.ok(!fs.readFileSync('public/app.js','utf8').includes("line.id==='001'"));
+});

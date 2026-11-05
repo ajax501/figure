@@ -1,1 +1,15 @@
-{"name":"figure-store","version":"1.0.0","private":true,"scripts":{"test":"node --test checkout.test.js","build":"node build.js","start":"node --env-file-if-exists=.env.local dev-server.js"},"dependencies":{"stripe":"^22.6.1"}}
+{
+  "name": "figure-store",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test checkout.test.js",
+    "build": "node sync-catalog.js && node build.js",
+    "start": "node --env-file-if-exists=.env.local dev-server.js",
+    "pretest": "node sync-catalog.js",
+    "prestart": "node sync-catalog.js"
+  },
+  "dependencies": {
+    "stripe": "^22.6.1"
+  }
+}

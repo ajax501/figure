@@ -27,7 +27,7 @@ Create a Stripe event destination at `https://YOUR-FIGURE-DOMAIN/api/stripe-webh
 - All six sizes: XS, S, M, L, XL, XXL.
 - $10 USD shipping per order, USA only.
 - Prices and shipping are exclusive of calculated taxes. Configure Stripe Tax's business origin and applicable registrations before using automatic tax. Only disable automatic tax if appropriate for your actual tax setup.
-- Concepts 002 and 003 cannot be purchased. Remove concepts from the bag before checkout.
+- Product 002 has four supplied product views; it is viewable but cannot be purchased until its price is confirmed. Concept 003 is not purchasable. Remove unpriced items and concepts from the bag before checkout.
 - Server-side catalog prices override browser-supplied prices. Quantities are limited to 20 per size per order.
 
 ## Test before launch
@@ -47,3 +47,7 @@ Complete Stripe activation, publish your shipping lead times and returns policy,
 Stripe is the payment/order ledger. Review paid Checkout sessions for delivery details, product sizes, quantities, and FIGURE order reference. Shipping and fulfillment are manual. Webhook retries safely repeat the same verification marker; track shipments by unique Stripe payment ID to avoid duplicate fulfillment. There is no inventory tracking or stock reservation, shipping-label purchase, or automated tracking email. Refunds are handled in Stripe.
 
 The existing chatgpt.site preview is separate from this Vercel deployment. No DNE store settings or files are modified by this repository.
+
+## Adding the next products
+
+Add each design to lib/catalog.json with its numbered ID, confirmed price in integer USD cents, model name, image path, photo views, description, details, and included items. Place photos in public/assets/ID/. Set price=null until the price is approved. Use concept=true only for illustrative previews. Run npm test and npm run build; sync-catalog.js generates the browser catalog from that same authoritative server catalog. Never edit public/commerce-config.js directly. All products use XS through XXL. Checkout accepts any combination of purchasable products with $10 shipping once per order.
