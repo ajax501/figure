@@ -80,5 +80,27 @@
     "concept": false,
     "details": "Top and bottom sold together as one set. Orange with a white chest graphic, full zip front, stand collar, and elasticated cuffs and hems. Fabric composition, measurements, and care instructions are to be confirmed.",
     "includes": "Top and bottom included."
+  },
+  {
+    "id": "004",
+    "name": "004",
+    "model": "FIGURE 004 - Top & Bottom Set",
+    "price": 20000,
+    "image": "assets/004/front.png",
+    "subtitle": "Off-white / multicolor",
+    "description": "An off-white top-and-bottom set marked with sweeping multicolor graphics. Zip-front top and matching bottom included, shown from the front and back.",
+    "photos": [
+      [
+        "front",
+        "Front look"
+      ],
+      [
+        "back",
+        "Back look"
+      ]
+    ],
+    "concept": false,
+    "details": "Top and bottom sold together as one set. Off-white with burgundy, green, black, navy, and gold-toned graphic accents, a stand collar, full zip front, and elasticated cuffs and hems. Fabric composition, measurements, and care instructions are to be confirmed.",
+    "includes": "Top and bottom included."
   }
 ]
