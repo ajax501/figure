@@ -29,3 +29,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .products{align-items:start}
 footer{padding-bottom:180px}
 @media(max-width:650px){footer{padding-bottom:130px}}
+/* One black across the site, matching the curtain shader's black base. */
+:root{--site-black:#000;--paper:var(--site-black)}
+html,body,.header,footer,main,.collection,.product,.minimal-hero,.contact-section,.site-menu nav,dialog,.order-summary,.photo-thumbs button,.main-photo:not(.photo-white),.art:not(.photographic .art){background-color:var(--site-black)}
+body,.header,footer,.product,.minimal-hero,.contact-section,.site-menu nav,dialog,.order-summary{background:var(--site-black)}
+.contact-section form{background:rgba(0,0,0,.78)}
+.contact-section input,.contact-section textarea,dialog select,.cart-quantity input{background:var(--site-black)}
+.motion{background:rgba(0,0,0,.6)}
