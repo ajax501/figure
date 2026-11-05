@@ -50,3 +50,7 @@ body,.header,footer,.product,.minimal-hero,.contact-section,.site-menu nav,dialo
 .policies a{overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:4px}
 .policy-nav{display:flex;flex-wrap:wrap;gap:22px;font-size:11px;margin:25px 0 15px}
 @media(max-width:650px){.policies{font-size:13px}.policies h2{font-size:18px}.policy-nav{gap:17px}}
+
+/* A tighter transition from the collection to contact. */
+.contact-section{margin-top:70px}
+@media(max-width:750px){.contact-section{margin-top:48px}}
