@@ -102,5 +102,27 @@
     "concept": false,
     "details": "Top and bottom sold together as one set. Off-white with burgundy, green, black, navy, and gold-toned graphic accents, a stand collar, full zip front, and elasticated cuffs and hems. Fabric composition, measurements, and care instructions are to be confirmed.",
     "includes": "Top and bottom included."
+  },
+  {
+    "id": "005",
+    "name": "005",
+    "model": "FIGURE 005 - Top & Bottom Set",
+    "price": 15000,
+    "image": "assets/005/front.png",
+    "subtitle": "Green / dark green",
+    "description": "A green top-and-bottom set with an all-over maze pattern. A short-sleeve crewneck top and matching short bottom, shown from the front and back.",
+    "photos": [
+      [
+        "front",
+        "Front look"
+      ],
+      [
+        "back",
+        "Back look"
+      ]
+    ],
+    "concept": false,
+    "details": "Top and bottom sold together as one set. Two-tone green maze graphics, a crew neckline, short sleeves, and a drawstring waist. Fabric composition, measurements, and care instructions are to be confirmed.",
+    "includes": "Top and bottom included."
   }
 ]

@@ -23,11 +23,11 @@ Create a Stripe event destination at `https://YOUR-FIGURE-DOMAIN/api/stripe-webh
 
 ## Confirmed commerce settings
 
-- Products 001 and 002 are top-and-bottom sets at $220 USD each; products 003 and 004 are $200 USD each.
+- Products 001 and 002 are top-and-bottom sets at $220 USD each; products 003 and 004 are $200 USD each; product 005 is $150 USD.
 - All six sizes: XS, S, M, L, XL, XXL.
 - $10 USD shipping per order, USA only.
 - Prices and shipping are exclusive of calculated taxes. Configure Stripe Tax's business origin and applicable registrations before using automatic tax. Only disable automatic tax if appropriate for your actual tax setup.
-- Products 001 through 004 are purchasable. Product 003 has front, side, top-only, and graphic-detail views. Remove any future unpriced items or concepts from the bag before checkout.
+- Products 001 through 005 are purchasable. Product 005 has front and back views of the green maze short set. Product 003 has front, side, top-only, and graphic-detail views. Remove any future unpriced items or concepts from the bag before checkout.
 - Server-side catalog prices override browser-supplied prices. Quantities are limited to 20 per size per order.
 
 ## Test before launch

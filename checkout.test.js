@@ -88,7 +88,7 @@ test('verified payment removes only purchased quantities, once; unpaid order pre
 test('confirmed products are purchasable; unknown designs cannot be charged',()=>{
  assert.equal(validateCart([{id:'002',size:'M',qty:1}])[0].price,22000);
  assert.equal(validateCart([{id:'003',size:'M',qty:1}])[0].price,20000);
- assert.throws(()=>validateCart([{id:'005',size:'M',qty:1}]));
+ assert.throws(()=>validateCart([{id:'006',size:'M',qty:1}]));
 });
 test('mixed-product checkout uses catalog prices and one shipping charge',async()=>{
  const products=require('./lib/catalog.json'),second=products.find(p=>p.id==='002');const old=second.price;second.price=12345;
@@ -132,5 +132,15 @@ test('product 004 uses the confirmed price and photos in mixed checkout',async()
  assert.equal((await createCheckout(request({items,requestId:'fourth-product-123456789012'}),client,config)).status,200);
  const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='004');
  assert.equal(line.price_data.unit_amount,20000);assert.equal(line.quantity,2);assert.equal(line.price_data.product_data.images[0],origin+'/assets/004/front.png');
+ assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
+});
+
+test('product 005 supports every size at $150 and combines with other products',async()=>{
+ for(const size of ['XS','S','M','L','XL','XXL'])assert.equal(validateCart([{id:'005',size,qty:1,price:1}])[0].price,15000);
+ let params;const client={checkout:{sessions:{create:async p=>{params=p;return {id:'cs_test_123456789012',url:'https://checkout.stripe.com/c/pay/test'};}}}};
+ const items=[{id:'001',size:'M',qty:1},{id:'005',size:'XXL',qty:2}];
+ assert.equal((await createCheckout(request({items,requestId:'fifth-product-123456789012'}),client,config)).status,200);
+ const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='005');assert.equal(line.price_data.unit_amount,15000);assert.equal(line.quantity,2);
+ assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/005/front.png');
  assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
 });
