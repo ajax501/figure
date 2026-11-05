@@ -85,9 +85,10 @@ test('verified payment removes only purchased quantities, once; unpaid order pre
  assert.equal(context.bag[0].qty,1);assert.equal(context.bag[1].qty,1);assert.equal(storage.size,0);
 });
 
-test('confirmed product 002 is purchasable; concepts cannot be charged',()=>{
+test('confirmed products are purchasable; unknown designs cannot be charged',()=>{
  assert.equal(validateCart([{id:'002',size:'M',qty:1}])[0].price,22000);
- assert.throws(()=>validateCart([{id:'003',size:'M',qty:1}]));
+ assert.equal(validateCart([{id:'003',size:'M',qty:1}])[0].price,20000);
+ assert.throws(()=>validateCart([{id:'004',size:'M',qty:1}]));
 });
 test('mixed-product checkout uses catalog prices and one shipping charge',async()=>{
  const products=require('./lib/catalog.json'),second=products.find(p=>p.id==='002');const old=second.price;second.price=12345;
@@ -108,10 +109,19 @@ test('every photographic view exists and catalog sync preserves product 002',()=
 });
 
 test('all confirmed sets use top and bottom terminology in checkout',async()=>{
- const products=require('./lib/catalog.json');for(const id of ['001','002'])for(const size of ['XS','S','M','L','XL','XXL']){
+ const products=require('./lib/catalog.json');for(const id of ['001','002','003'])for(const size of ['XS','S','M','L','XL','XXL']){
  let params;const client={checkout:{sessions:{create:async p=>{params=p;return {id:'cs_test_123456789012',url:'https://checkout.stripe.com/c/pay/test'};}}}};
  await createCheckout(request({items:[{id,size,qty:1}],requestId:'terminology-test-123456789012'}),client,config);
- const data=params.line_items[0].price_data;assert.equal(data.unit_amount,22000);assert.ok(data.product_data.name.includes('Top & Bottom Set'));assert.equal(data.product_data.description,`Size ${size}. Top and bottom included.`);
+ const data=params.line_items[0].price_data;assert.equal(data.unit_amount,id==='003'?20000:22000);assert.ok(data.product_data.name.includes('Top & Bottom Set'));assert.equal(data.product_data.description,`Size ${size}. Top and bottom included.`);
  }
  assert.ok(!/jacket|trouser/i.test(JSON.stringify(products)));
+});
+
+test('all three products share one shipping charge and preserve independent prices',async()=>{
+ let params;const client={checkout:{sessions:{create:async p=>{params=p;return {id:'cs_test_123456789012',url:'https://checkout.stripe.com/c/pay/test'};}}}};
+ const items=[{id:'001',size:'XS',qty:1},{id:'002',size:'M',qty:1},{id:'003',size:'XXL',qty:1,price:1}];
+ assert.equal((await createCheckout(request({items,requestId:'three-products-123456789012'}),client,config)).status,200);
+ assert.deepEqual(params.line_items.map(x=>x.price_data.unit_amount),[22000,22000,20000]);
+ assert.equal(params.line_items.reduce((sum,x)=>sum+x.quantity*x.price_data.unit_amount,0)+params.shipping_options[0].shipping_rate_data.fixed_amount.amount,65000);
+ assert.equal(params.line_items[2].price_data.product_data.images[0],origin+'/assets/003/front.png');
 });

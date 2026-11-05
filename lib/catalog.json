@@ -53,12 +53,32 @@
   },
   {
     "id": "003",
-    "name": "The Discipline Bottom",
-    "model": "FIGURE 003",
-    "price": null,
-    "subtitle": "Carbon",
-    "type": "pants",
-    "concept": true,
-    "description": "A fluid, straight silhouette with a composed stance. Design concept; final materials and release details are to be confirmed."
+    "name": "003",
+    "model": "FIGURE 003 - Top & Bottom Set",
+    "price": 20000,
+    "image": "assets/003/front.png",
+    "subtitle": "Orange / white",
+    "description": "An orange top-and-bottom set with a white angular chest graphic. Stand-collar zip top and matching bottom, shown in front, side, top-only, and detail views.",
+    "photos": [
+      [
+        "front",
+        "Front look"
+      ],
+      [
+        "side",
+        "Side look"
+      ],
+      [
+        "top",
+        "Top view"
+      ],
+      [
+        "detail",
+        "Graphic detail"
+      ]
+    ],
+    "concept": false,
+    "details": "Top and bottom sold together as one set. Orange with a white chest graphic, full zip front, stand collar, and elasticated cuffs and hems. Fabric composition, measurements, and care instructions are to be confirmed.",
+    "includes": "Top and bottom included."
   }
 ]
