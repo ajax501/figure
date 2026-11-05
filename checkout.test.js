@@ -31,8 +31,8 @@ test('session creation includes sizes, fixed shipping, return links and stable r
   const p=calls[0].params;
   assert.equal(p.line_items[0].price_data.unit_amount,22000);
   assert.equal(p.line_items[0].price_data.product_data.metadata.size,'M');
-  assert.equal(p.line_items[0].price_data.product_data.name,'FIGURE 001 \u2014 Jacket & Trouser Set');
-  assert.equal(p.line_items[0].price_data.product_data.description,'Size M. Jacket and trouser included.');
+  assert.equal(p.line_items[0].price_data.product_data.name,'FIGURE 001 - Top & Bottom Set');
+  assert.equal(p.line_items[0].price_data.product_data.description,'Size M. Top and bottom included.');
 
   assert.equal(p.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
   assert.ok(p.success_url.includes('{CHECKOUT_SESSION_ID}'));
@@ -85,8 +85,8 @@ test('verified payment removes only purchased quantities, once; unpaid order pre
  assert.equal(context.bag[0].qty,1);assert.equal(context.bag[1].qty,1);assert.equal(storage.size,0);
 });
 
-test('unpriced products and concepts cannot be charged',()=>{
- assert.throws(()=>validateCart([{id:'002',size:'M',qty:1}]));
+test('confirmed product 002 is purchasable; concepts cannot be charged',()=>{
+ assert.equal(validateCart([{id:'002',size:'M',qty:1}])[0].price,22000);
  assert.throws(()=>validateCart([{id:'003',size:'M',qty:1}]));
 });
 test('mixed-product checkout uses catalog prices and one shipping charge',async()=>{
@@ -103,6 +103,15 @@ test('mixed-product checkout uses catalog prices and one shipping charge',async(
 test('every photographic view exists and catalog sync preserves product 002',()=>{
  const products=require('./lib/catalog.json');for(const p of products)for(const [view] of p.photos||[])assert.ok(fs.existsSync(`public/assets/${p.id}/${view}.png`));
  const context={window:{}};vm.runInNewContext(fs.readFileSync('public/commerce-config.js','utf8'),context);
- const product=context.window.FIGURE_CATALOG.find(p=>p.id==='002');assert.equal(product.photos.length,4);assert.equal(product.concept,false);assert.equal(context.window.FIGURE_COMMERCE.products['002'].price,null);
+ const product=context.window.FIGURE_CATALOG.find(p=>p.id==='002');assert.equal(product.photos.length,4);assert.equal(product.concept,false);assert.equal(context.window.FIGURE_COMMERCE.products['002'].price,22000);
  assert.ok(!fs.readFileSync('public/app.js','utf8').includes("line.id==='001'"));
+});
+
+test('all confirmed sets use top and bottom terminology in checkout',async()=>{
+ const products=require('./lib/catalog.json');for(const id of ['001','002'])for(const size of ['XS','S','M','L','XL','XXL']){
+ let params;const client={checkout:{sessions:{create:async p=>{params=p;return {id:'cs_test_123456789012',url:'https://checkout.stripe.com/c/pay/test'};}}}};
+ await createCheckout(request({items:[{id,size,qty:1}],requestId:'terminology-test-123456789012'}),client,config);
+ const data=params.line_items[0].price_data;assert.equal(data.unit_amount,22000);assert.ok(data.product_data.name.includes('Top & Bottom Set'));assert.equal(data.product_data.description,`Size ${size}. Top and bottom included.`);
+ }
+ assert.ok(!/jacket|trouser/i.test(JSON.stringify(products)));
 });

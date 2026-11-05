@@ -23,11 +23,11 @@ Create a Stripe event destination at `https://YOUR-FIGURE-DOMAIN/api/stripe-webh
 
 ## Confirmed commerce settings
 
-- Product 001 is a jacket-and-trouser set at $220 USD.
+- Products 001 and 002 are top-and-bottom sets at $220 USD each.
 - All six sizes: XS, S, M, L, XL, XXL.
 - $10 USD shipping per order, USA only.
 - Prices and shipping are exclusive of calculated taxes. Configure Stripe Tax's business origin and applicable registrations before using automatic tax. Only disable automatic tax if appropriate for your actual tax setup.
-- Product 002 has four supplied product views; it is viewable but cannot be purchased until its price is confirmed. Concept 003 is not purchasable. Remove unpriced items and concepts from the bag before checkout.
+- Product 002 has four supplied product views and is purchasable. Concept 003 is not purchasable. Remove unpriced items and concepts from the bag before checkout.
 - Server-side catalog prices override browser-supplied prices. Quantities are limited to 20 per size per order.
 
 ## Test before launch
