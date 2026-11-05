@@ -88,7 +88,7 @@ test('verified payment removes only purchased quantities, once; unpaid order pre
 test('confirmed products are purchasable; unknown designs cannot be charged',()=>{
  assert.equal(validateCart([{id:'002',size:'M',qty:1}])[0].price,22000);
  assert.equal(validateCart([{id:'003',size:'M',qty:1}])[0].price,20000);
- assert.throws(()=>validateCart([{id:'006',size:'M',qty:1}]));
+ assert.throws(()=>validateCart([{id:'007',size:'M',qty:1}]));
 });
 test('mixed-product checkout uses catalog prices and one shipping charge',async()=>{
  const products=require('./lib/catalog.json'),second=products.find(p=>p.id==='002');const old=second.price;second.price=12345;
@@ -143,4 +143,18 @@ test('product 005 supports every size at $150 and combines with other products',
  const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='005');assert.equal(line.price_data.unit_amount,15000);assert.equal(line.quantity,2);
  assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/005/front.png');
  assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
+});
+
+test('product 006 gallery is complete and pricing stays authoritative',()=>{
+ const p=require('./lib/catalog.json').find(p=>p.id==='006');assert.equal(p.photos.length,4);assert.equal(p.concept,false);
+ for(const [view] of p.photos)assert.ok(fs.existsSync(`public/assets/006/${view}.png`));
+ if(p.price===null)assert.throws(()=>validateCart([{id:'006',size:'M',qty:1,price:1}]));
+ else for(const size of ['XS','S','M','L','XL','XXL'])assert.equal(validateCart([{id:'006',size,qty:1,price:1}])[0].price,p.price);
+});
+
+test('product 006 charges $240 with correct included items and one shipping rate',async()=>{
+ let params;const client={checkout:{sessions:{create:async p=>{params=p;return {id:'cs_test_123456789012',url:'https://checkout.stripe.com/c/pay/test'};}}}};
+ const items=[{id:'005',size:'S',qty:1},{id:'006',size:'XXL',qty:2,price:1}];
+ assert.equal((await createCheckout(request({items,requestId:'sixth-product-123456789012'}),client,config)).status,200);
+ const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='006');assert.equal(line.price_data.unit_amount,24000);assert.equal(line.quantity,2);assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/006/front.png');assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
 });

@@ -124,5 +124,35 @@
     "concept": false,
     "details": "Top and bottom sold together as one set. Two-tone green maze graphics, a crew neckline, short sleeves, and a drawstring waist. Fabric composition, measurements, and care instructions are to be confirmed.",
     "includes": "Top and bottom included."
+  },
+  {
+    "id": "006",
+    "name": "006",
+    "model": "FIGURE 006 - Top & Bottom Set",
+    "price": 24000,
+    "image": "assets/006/front.png",
+    "subtitle": "Ice blue / white / grey",
+    "description": "An ice-blue top-and-bottom set covered in crystal-inspired graphics. A hooded zip-front top and matching bottom, shown from the front and back with zip and waist details.",
+    "photos": [
+      [
+        "front",
+        "Front look"
+      ],
+      [
+        "back",
+        "Back look"
+      ],
+      [
+        "zip-detail",
+        "Zip detail"
+      ],
+      [
+        "waist-detail",
+        "Waist detail"
+      ]
+    ],
+    "concept": false,
+    "details": "Top and bottom sold together as one set. All-over crystal-inspired print, a hooded top with full zip front, and a matching drawstring bottom. Fabric composition, measurements, and care instructions are to be confirmed.",
+    "includes": "Top and bottom included."
   }
 ]
