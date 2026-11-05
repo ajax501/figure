@@ -36,3 +36,6 @@ body,.header,footer,.product,.minimal-hero,.contact-section,.site-menu nav,dialo
 .contact-section form{background:rgba(0,0,0,.78)}
 .contact-section input,.contact-section textarea,dialog select,.cart-quantity input{background:var(--site-black)}
 .motion{background:rgba(0,0,0,.6)}
+/* Remove section dividers and the programmatic page-container focus ring. */
+.contact-section{border-top:0}
+#store-view:focus{outline:none}
