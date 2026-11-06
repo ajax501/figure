@@ -123,7 +123,7 @@ test('all three products share one shipping charge and preserve independent pric
  assert.equal((await createCheckout(request({items,requestId:'three-products-123456789012'}),client,config)).status,200);
  assert.deepEqual(params.line_items.map(x=>x.price_data.unit_amount),[22000,22000,20000]);
  assert.equal(params.line_items.reduce((sum,x)=>sum+x.quantity*x.price_data.unit_amount,0)+params.shipping_options[0].shipping_rate_data.fixed_amount.amount,65000);
- assert.equal(params.line_items[2].price_data.product_data.images[0],origin+'/assets/003/front.png');
+ assert.equal(params.line_items[2].price_data.product_data.images[0],origin+'/assets/003/cover-white.png');
 });
 
 test('product 004 uses the confirmed price and photos in mixed checkout',async()=>{
@@ -131,7 +131,7 @@ test('product 004 uses the confirmed price and photos in mixed checkout',async()
  const items=[{id:'001',size:'M',qty:1},{id:'004',size:'XXL',qty:2,price:1}];
  assert.equal((await createCheckout(request({items,requestId:'fourth-product-123456789012'}),client,config)).status,200);
  const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='004');
- assert.equal(line.price_data.unit_amount,20000);assert.equal(line.quantity,2);assert.equal(line.price_data.product_data.images[0],origin+'/assets/004/front.png');
+ assert.equal(line.price_data.unit_amount,20000);assert.equal(line.quantity,2);assert.equal(line.price_data.product_data.images[0],origin+'/assets/004/cover-white.png');
  assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
 });
 
@@ -141,7 +141,7 @@ test('product 005 supports every size at $150 and combines with other products',
  const items=[{id:'001',size:'M',qty:1},{id:'005',size:'XXL',qty:2}];
  assert.equal((await createCheckout(request({items,requestId:'fifth-product-123456789012'}),client,config)).status,200);
  const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='005');assert.equal(line.price_data.unit_amount,15000);assert.equal(line.quantity,2);
- assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/005/front.png');
+ assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/005/cover-white.png');
  assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
 });
 
@@ -156,7 +156,7 @@ test('product 006 charges $240 with correct included items and one shipping rate
  let params;const client={checkout:{sessions:{create:async p=>{params=p;return {id:'cs_test_123456789012',url:'https://checkout.stripe.com/c/pay/test'};}}}};
  const items=[{id:'005',size:'S',qty:1},{id:'006',size:'XXL',qty:2,price:1}];
  assert.equal((await createCheckout(request({items,requestId:'sixth-product-123456789012'}),client,config)).status,200);
- const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='006');assert.equal(line.price_data.unit_amount,24000);assert.equal(line.quantity,2);assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/006/front.png');assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
+ const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='006');assert.equal(line.price_data.unit_amount,24000);assert.equal(line.quantity,2);assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/006/cover-white.png');assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
 });
 
 test('homepage framing gives every model the same full-body span without distorting photos',()=>{
@@ -167,4 +167,11 @@ test('homepage framing gives every model the same full-body span without distort
  }
  assert.equal(context.tileFraming({}), '');
  const css=fs.readFileSync('public/style.css','utf8');assert.ok(css.includes('.products .photographic .art img{inset:auto;'));assert.ok(css.includes('width:auto;height:var(--tile-image-height,100%)'));
+});
+
+test('every product uses the cleaned cover and retains its original source',()=>{
+ for(const product of require('./lib/catalog.json')){
+ assert.equal(product.image,`assets/${product.id}/cover-white.png`);assert.equal(product.photos[0][0],'cover-white');
+ assert.ok(fs.existsSync('public/'+product.image));assert.ok(fs.existsSync('public/'+product.originalCoverImage));
+ }
 });

@@ -4,12 +4,12 @@
     "name": "001",
     "model": "FIGURE 001 - Top & Bottom Set",
     "price": 22000,
-    "image": "assets/001/actual-front.png",
+    "image": "assets/001/cover-white.png",
     "subtitle": "Yellow / black",
     "description": "A yellow-and-black camouflage set. Zip-front top and matching bottom included. Explore the actual product from the front and back.",
     "photos": [
       [
-        "actual-front",
+        "cover-white",
         "Front look"
       ],
       [
@@ -23,19 +23,20 @@
     "tileFraming": {
       "top": 0.0213,
       "bottom": 0.966
-    }
+    },
+    "originalCoverImage": "assets/001/actual-front.png"
   },
   {
     "id": "002",
     "name": "002",
     "model": "FIGURE 002 - Top & Bottom Set",
     "price": 22000,
-    "image": "assets/002/front.png",
+    "image": "assets/002/cover-white.png",
     "subtitle": "Black / blue / white",
     "description": "A black top-and-bottom set scattered with blue and white star motifs. A stand-collar zip top and matching bottom, shown from the front, back, seated, and top-only views.",
     "photos": [
       [
-        "front",
+        "cover-white",
         "Front look"
       ],
       [
@@ -57,19 +58,20 @@
     "tileFraming": {
       "top": 0.0162,
       "bottom": 0.9903
-    }
+    },
+    "originalCoverImage": "assets/002/front.png"
   },
   {
     "id": "003",
     "name": "003",
     "model": "FIGURE 003 - Top & Bottom Set",
     "price": 20000,
-    "image": "assets/003/front.png",
+    "image": "assets/003/cover-white.png",
     "subtitle": "Orange / white",
     "description": "An orange top-and-bottom set with a white angular chest graphic. Stand-collar zip top and matching bottom, shown in front, side, top-only, and detail views.",
     "photos": [
       [
-        "front",
+        "cover-white",
         "Front look"
       ],
       [
@@ -91,19 +93,20 @@
     "tileFraming": {
       "top": 0.0181,
       "bottom": 0.974
-    }
+    },
+    "originalCoverImage": "assets/003/front.png"
   },
   {
     "id": "004",
     "name": "004",
     "model": "FIGURE 004 - Top & Bottom Set",
     "price": 20000,
-    "image": "assets/004/front.png",
+    "image": "assets/004/cover-white.png",
     "subtitle": "Off-white / multicolor",
     "description": "An off-white top-and-bottom set marked with sweeping multicolor graphics. Zip-front top and matching bottom included, shown from the front and back.",
     "photos": [
       [
-        "front",
+        "cover-white",
         "Front look"
       ],
       [
@@ -117,19 +120,20 @@
     "tileFraming": {
       "top": 0.0259,
       "bottom": 0.965
-    }
+    },
+    "originalCoverImage": "assets/004/front.png"
   },
   {
     "id": "005",
     "name": "005",
     "model": "FIGURE 005 - Top & Bottom Set",
     "price": 15000,
-    "image": "assets/005/front.png",
+    "image": "assets/005/cover-white.png",
     "subtitle": "Green / dark green",
     "description": "A green top-and-bottom set with an all-over maze pattern. A short-sleeve crewneck top and matching short bottom, shown from the front and back.",
     "photos": [
       [
-        "front",
+        "cover-white",
         "Front look"
       ],
       [
@@ -143,19 +147,20 @@
     "tileFraming": {
       "top": 0.0185,
       "bottom": 0.9702
-    }
+    },
+    "originalCoverImage": "assets/005/front.png"
   },
   {
     "id": "006",
     "name": "006",
     "model": "FIGURE 006 - Top & Bottom Set",
     "price": 24000,
-    "image": "assets/006/front.png",
+    "image": "assets/006/cover-white.png",
     "subtitle": "Ice blue / white / grey",
     "description": "An ice-blue top-and-bottom set covered in crystal-inspired graphics. A hooded zip-front top and matching bottom, shown from the front and back with zip and waist details.",
     "photos": [
       [
-        "front",
+        "cover-white",
         "Front look"
       ],
       [
@@ -177,6 +182,7 @@
     "tileFraming": {
       "top": 0.0098,
       "bottom": 0.9692
-    }
+    },
+    "originalCoverImage": "assets/006/front.png"
   }
 ]

@@ -63,3 +63,6 @@ footer img{width:96px;height:auto;object-fit:contain}
 @media(max-width:650px){footer img{width:80px}}
 /* White frames for the homepage product photographs. */
 .products .photographic .art{background:#fff}
+
+/* White surrounding frames for the cleaned cover photos. */
+.photo-white,.photo-thumbs img,#detailContent img{background:#fff}
