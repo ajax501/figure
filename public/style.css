@@ -57,3 +57,7 @@ body,.header,footer,.product,.minimal-hero,.contact-section,.site-menu nav,dialo
 
 /* Homepage-only framing: align the measured head-to-shoe span without stretching photos. */
 .products .photographic .art img{inset:auto;top:var(--tile-image-top,0%);left:50%;width:auto;height:var(--tile-image-height,100%);max-width:none;transform:translateX(-50%);object-fit:contain}
+
+/* Larger footer emblem, preserving its natural proportions. */
+footer img{width:96px;height:auto;object-fit:contain}
+@media(max-width:650px){footer img{width:80px}}
