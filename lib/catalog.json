@@ -19,7 +19,11 @@
     ],
     "concept": false,
     "details": "Top and bottom sold together as one set. Yellow-and-black camouflage with a stand collar, full zip front, and elasticated cuffs and hems. Fabric composition, measurements, and care instructions are to be confirmed.",
-    "includes": "Top and bottom included."
+    "includes": "Top and bottom included.",
+    "tileFraming": {
+      "top": 0.0213,
+      "bottom": 0.966
+    }
   },
   {
     "id": "002",
@@ -49,7 +53,11 @@
     ],
     "concept": false,
     "details": "Top and bottom sold together as one set. Star-patterned black with a full zip front, stand collar, and elasticated cuffs. Fabric composition, measurements, and care instructions are to be confirmed.",
-    "includes": "Top and bottom included."
+    "includes": "Top and bottom included.",
+    "tileFraming": {
+      "top": 0.0162,
+      "bottom": 0.9903
+    }
   },
   {
     "id": "003",
@@ -79,7 +87,11 @@
     ],
     "concept": false,
     "details": "Top and bottom sold together as one set. Orange with a white chest graphic, full zip front, stand collar, and elasticated cuffs and hems. Fabric composition, measurements, and care instructions are to be confirmed.",
-    "includes": "Top and bottom included."
+    "includes": "Top and bottom included.",
+    "tileFraming": {
+      "top": 0.0181,
+      "bottom": 0.974
+    }
   },
   {
     "id": "004",
@@ -101,7 +113,11 @@
     ],
     "concept": false,
     "details": "Top and bottom sold together as one set. Off-white with burgundy, green, black, navy, and gold-toned graphic accents, a stand collar, full zip front, and elasticated cuffs and hems. Fabric composition, measurements, and care instructions are to be confirmed.",
-    "includes": "Top and bottom included."
+    "includes": "Top and bottom included.",
+    "tileFraming": {
+      "top": 0.0259,
+      "bottom": 0.965
+    }
   },
   {
     "id": "005",
@@ -123,7 +139,11 @@
     ],
     "concept": false,
     "details": "Top and bottom sold together as one set. Two-tone green maze graphics, a crew neckline, short sleeves, and a drawstring waist. Fabric composition, measurements, and care instructions are to be confirmed.",
-    "includes": "Top and bottom included."
+    "includes": "Top and bottom included.",
+    "tileFraming": {
+      "top": 0.0185,
+      "bottom": 0.9702
+    }
   },
   {
     "id": "006",
@@ -153,6 +173,10 @@
     ],
     "concept": false,
     "details": "Top and bottom sold together as one set. All-over crystal-inspired print, a hooded top with full zip front, and a matching drawstring bottom. Fabric composition, measurements, and care instructions are to be confirmed.",
-    "includes": "Top and bottom included."
+    "includes": "Top and bottom included.",
+    "tileFraming": {
+      "top": 0.0098,
+      "bottom": 0.9692
+    }
   }
 ]

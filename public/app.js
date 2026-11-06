@@ -10,7 +10,13 @@ function validBag(value){if(!Array.isArray(value))return [];return value.filter(
 let bag=[];try{bag=validBag(JSON.parse(localStorage.getItem('figure-store-bag-v2')||'[]'))}catch{}
 function save(){try{localStorage.setItem('figure-store-bag-v2',JSON.stringify(bag))}catch{}document.querySelector('#count').textContent=bag.reduce((n,x)=>n+x.qty,0)}
 function picture(p,view=p.photos?.[0]?.[0]||'front',lazy=true){return p.photos?`<img src="assets/${p.id}/${view}.png" alt="FIGURE ${p.id}, ${p.photos.find(x=>x[0]===view)?.[1]||'product view'}, ${p.subtitle}" ${lazy?'loading="lazy"':''} decoding="async">`:art(p.type)}
-function renderTiles(){document.querySelector('#products').innerHTML=catalog.map(p=>`<a class="product ${p.photos?'photographic':''}" href="#/product/${p.id}" aria-label="View FIGURE ${p.id}"><div class="art">${picture(p)}</div><div class="info"><h3>${p.id}${p.concept?' / CONCEPT':''}</h3><small>${p.concept?'DESIGN PREVIEW':priceLabel(p)}</small></div></a>`).join('')}
+function tileFraming(p){
+ const framing=p.tileFraming;if(!framing||!Number.isFinite(framing.top)||!Number.isFinite(framing.bottom)||framing.top<0||framing.bottom>1||framing.bottom<=framing.top)return '';
+ const height=0.90/(framing.bottom-framing.top);
+ const top=0.05-framing.top*height;
+ return `--tile-image-height:${(height*100).toFixed(4)}%;--tile-image-top:${(top*100).toFixed(4)}%`;
+}
+function renderTiles(){document.querySelector('#products').innerHTML=catalog.map(p=>`<a class="product ${p.photos?'photographic':''}" href="#/product/${p.id}" aria-label="View FIGURE ${p.id}"><div class="art" style="${tileFraming(p)}">${picture(p)}</div><div class="info"><h3>${p.id}${p.concept?' / CONCEPT':''}</h3><small>${p.concept?'DESIGN PREVIEW':priceLabel(p)}</small></div></a>`).join('')}
 const store=document.querySelector('#store-view'),home=document.querySelector('#home'),lightbox=document.querySelector('#detail');
 function shell(title,body){store.innerHTML=`<div class="store-page"><a class="back-link" href="#collection">← THE COLLECTION</a><h1 class="store-title">${title}</h1>${body}</div>`}
 function productPage(p){let view=p.photos?.[0]?.[0]||'front',selected='',qty=1;

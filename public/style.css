@@ -54,3 +54,6 @@ body,.header,footer,.product,.minimal-hero,.contact-section,.site-menu nav,dialo
 /* A tighter transition from the collection to contact. */
 .contact-section{margin-top:70px}
 @media(max-width:750px){.contact-section{margin-top:48px}}
+
+/* Homepage-only framing: align the measured head-to-shoe span without stretching photos. */
+.products .photographic .art img{inset:auto;top:var(--tile-image-top,0%);left:50%;width:auto;height:var(--tile-image-height,100%);max-width:none;transform:translateX(-50%);object-fit:contain}

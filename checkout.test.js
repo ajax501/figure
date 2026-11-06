@@ -158,3 +158,13 @@ test('product 006 charges $240 with correct included items and one shipping rate
  assert.equal((await createCheckout(request({items,requestId:'sixth-product-123456789012'}),client,config)).status,200);
  const line=params.line_items.find(x=>x.price_data.product_data.metadata.product_id==='006');assert.equal(line.price_data.unit_amount,24000);assert.equal(line.quantity,2);assert.equal(line.price_data.product_data.description,'Size XXL. Top and bottom included.');assert.equal(line.price_data.product_data.images[0],origin+'/assets/006/front.png');assert.equal(params.shipping_options.length,1);assert.equal(params.shipping_options[0].shipping_rate_data.fixed_amount.amount,1000);
 });
+
+test('homepage framing gives every model the same full-body span without distorting photos',()=>{
+ const context=vm.createContext({});const source=fs.readFileSync('public/app.js','utf8');vm.runInContext(source.slice(source.indexOf('function tileFraming('),source.indexOf('function renderTiles(')),context);
+ for(const product of require('./lib/catalog.json')){
+ const style=context.tileFraming(product);const height=Number(style.match(/--tile-image-height:([\d.]+)%/)[1])/100;const top=Number(style.match(/--tile-image-top:([-\d.]+)%/)[1])/100;
+ assert.ok(Math.abs(top+product.tileFraming.top*height-.05)<.00001);assert.ok(Math.abs(top+product.tileFraming.bottom*height-.95)<.00001);
+ }
+ assert.equal(context.tileFraming({}), '');
+ const css=fs.readFileSync('public/style.css','utf8');assert.ok(css.includes('.products .photographic .art img{inset:auto;'));assert.ok(css.includes('width:auto;height:var(--tile-image-height,100%)'));
+});
