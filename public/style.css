@@ -61,3 +61,5 @@ body,.header,footer,.product,.minimal-hero,.contact-section,.site-menu nav,dialo
 /* Larger footer emblem, preserving its natural proportions. */
 footer img{width:96px;height:auto;object-fit:contain}
 @media(max-width:650px){footer img{width:80px}}
+/* White frames for the homepage product photographs. */
+.products .photographic .art{background:#fff}
