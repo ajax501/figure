@@ -79,3 +79,7 @@ h1,h2,h3,.info h3{font-weight:400}
 
 /* Light FIGURE lettering in the header. */
 .header .wordmark,.header .wordmark span{font-weight:400}
+
+/* Bring the footer closer to the contact section. */
+footer{padding-top:90px}
+@media(max-width:650px){footer{padding-top:60px}}
