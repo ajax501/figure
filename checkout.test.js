@@ -175,3 +175,16 @@ test('every product uses the cleaned cover and retains its original source',()=>
  assert.ok(fs.existsSync('public/'+product.image));assert.ok(fs.existsSync('public/'+product.originalCoverImage));
  }
 });
+
+test('theme preview defaults to black, accepts white URL, and saves user switching',()=>{
+ const code=fs.readFileSync('public/theme.js','utf8');
+ function setup(saved=null,search=''){
+  const handlers={},storage=new Map(saved?[['figure-theme',saved]]:[]),root={dataset:{}},button={setAttribute(name,value){this[name]=value;},addEventListener(name,fn){handlers[name]=fn;}},meta={};
+  const context=vm.createContext({document:{documentElement:root,querySelector:s=>s==='#theme-toggle'?button:meta,addEventListener:(n,fn)=>handlers[n]=fn},localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},location:{search,href:'https://figure.example.com/'+search+'#/product/001'},history:{replaceState(...args){handlers.url=args[2];}},URL,URLSearchParams});
+  vm.runInContext(code,context);handlers.DOMContentLoaded();return {root,button,handlers,storage,meta};
+ }
+ const normal=setup();assert.equal(normal.root.dataset.theme,'dark');assert.equal(normal.button.textContent,'View white theme');
+ const preview=setup(null,'?theme=light');assert.equal(preview.root.dataset.theme,'light');assert.equal(preview.meta.content,'#ffffff');assert.equal(preview.button.textContent,'View black theme');
+ preview.handlers.click();assert.equal(preview.root.dataset.theme,'dark');assert.equal(preview.storage.get('figure-theme'),'dark');assert.equal(preview.handlers.url,'/#/product/001');
+ preview.handlers.click();assert.equal(preview.storage.get('figure-theme'),'light');assert.equal(setup('light').root.dataset.theme,'light');
+});

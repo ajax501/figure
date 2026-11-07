@@ -66,3 +66,30 @@ footer img{width:96px;height:auto;object-fit:contain}
 
 /* White surrounding frames for the cleaned cover photos. */
 .photo-white,.photo-thumbs img,#detailContent img{background:#fff}
+/* Optional white-theme preview. Black remains the default. */
+html[data-theme="light"]{color-scheme:light;--site-black:#fff;--paper:#fff;--ink:#202020;--line:#dedede}
+html[data-theme="light"] body,html[data-theme="light"] .header,html[data-theme="light"] footer,html[data-theme="light"] main,html[data-theme="light"] .collection,html[data-theme="light"] .product,html[data-theme="light"] .minimal-hero,html[data-theme="light"] .contact-section,html[data-theme="light"] .site-menu nav,html[data-theme="light"] dialog,html[data-theme="light"] .order-summary{background:#fff;color:#202020}
+html[data-theme="light"] .wordmark img,html[data-theme="light"] footer img{filter:invert(1) grayscale(1)}
+html[data-theme="light"] .site-menu summary span{background:#444}
+html[data-theme="light"] .site-menu nav{border-color:#ddd;box-shadow:0 10px 25px #0001}
+html[data-theme="light"] .site-menu nav a:hover,html[data-theme="light"] .site-menu nav button:hover{background:#f2f2f2}
+html[data-theme="light"] .minimal-hero:before{opacity:.4}
+html[data-theme="light"] .minimal-hero p{color:#111;text-shadow:0 1px 10px #fff,0 0 25px #fff}
+html[data-theme="light"] .info small,html[data-theme="light"] .quiet,html[data-theme="light"] .eyebrow,html[data-theme="light"] .product-copy p,html[data-theme="light"] .cart-row p,html[data-theme="light"] .cart-row>span,html[data-theme="light"] .cart-quantity,html[data-theme="light"] .remove-line,html[data-theme="light"] .gallery .quiet,html[data-theme="light"] .order-summary .quiet,html[data-theme="light"] dialog p{color:#606060}
+html[data-theme="light"] .product-copy .product-price{color:#202020}
+html[data-theme="light"] #contact-shader{filter:invert(1) hue-rotate(180deg)}
+html[data-theme="light"] .contact-section:after{background:linear-gradient(90deg,#ffffff77,#ffffff22)}
+html[data-theme="light"] .contact-intro{text-shadow:none}
+html[data-theme="light"] .contact-intro p,html[data-theme="light"] .contact-intro .motto{color:#303030}
+html[data-theme="light"] .contact-section form{background:rgba(255,255,255,.86);border-color:#ccc}
+html[data-theme="light"] .contact-section input,html[data-theme="light"] .contact-section textarea,html[data-theme="light"] dialog select,html[data-theme="light"] .cart-quantity input{background:#fff;color:#202020;border-color:#bbb}
+html[data-theme="light"] .contact-section .quiet{color:#606060}
+html[data-theme="light"] .primary,html[data-theme="light"] .button{background:#202020;color:#fff;border-color:#202020}
+html[data-theme="light"] .motion{background:#fff9;color:#202020;border-color:#999}
+html[data-theme="light"] .photo-thumbs button{background:#fff;color:#606060;border-color:#ddd}
+html[data-theme="light"] .photo-thumbs button[aria-pressed=true]{border-color:#202020;color:#202020}
+html[data-theme="light"] .size-options button,html[data-theme="light"] .quantity button,html[data-theme="light"] .quantity input{color:#202020}
+html[data-theme="light"] .size-options button,html[data-theme="light"] .quantity,html[data-theme="light"] .product-details,html[data-theme="light"] .cart-row,html[data-theme="light"] .order-summary,html[data-theme="light"] dialog{border-color:#d0d0d0}
+html[data-theme="light"] .size-options button[aria-pressed=true]{background:#202020;color:#fff;border-color:#202020}
+html[data-theme="light"] .policies,html[data-theme="light"] .policies h2,html[data-theme="light"] .policies h3{color:#202020}
+html[data-theme="light"] :is(a,button,input,textarea,select):focus-visible{outline-color:#444}
